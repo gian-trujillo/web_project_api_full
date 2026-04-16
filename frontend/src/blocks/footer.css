@@ -1,0 +1,24 @@
+.footer {
+  width: 100%;
+  max-width: 880px;
+}
+
+.footer__copyright {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: #545454;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    max-width: 584px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .footer {
+    max-width: 280px;
+  }
+}

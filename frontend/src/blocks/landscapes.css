@@ -1,0 +1,96 @@
+.landscapes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+  margin-bottom: 65px;
+}
+
+.landscapes__card {
+  position: relative;
+  max-width: 282px;
+  width: 100%;
+  border-radius: 4%;
+  color: black;
+  overflow: hidden;
+}
+
+.landscapes__image {
+  width: 100%;
+  display: block;
+  height: 282px;
+  margin: 0;
+  object-fit: cover;
+}
+
+.landscapes__card-description {
+  margin: 0;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.landscapes__card-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: Inter;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+}
+
+.landscapes__card-icon {
+  width: 35px;
+  height: 19px;
+  background-repeat: no-repeat;
+  background-image: url(../images/like_icon.png);
+  cursor: pointer;
+}
+
+.landscapes__card-icon:hover {
+  width: 35px;
+  height: 19px;
+  background-repeat: no-repeat;
+  background-image: url(../images/like_icon_hover.png);
+}
+
+.landscapes__card-icon_liked {
+  background-image: url(../images/like_icon_active.png);
+  width: 35px;
+  height: 19px;
+  background-repeat: no-repeat;
+}
+
+.landscapes__card-trash {
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-image: url(../images/Trash.png);
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.landscapes__card-trash:hover {
+  background-image: url(../images/Trash_hover.png);
+}
+
+@media screen and (max-width: 768px) {
+  .landscapes {
+    grid-template-columns: repeat(2, auto);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .landscapes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 50px;
+  }
+}
