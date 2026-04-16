@@ -92,7 +92,7 @@ class Api {
 }
 
 export const api = new Api({
-  url: "http://localhost:3000",
+  url: "http://api.projectarounddomain.mooo.com",
   headers: {
     // authorization: "76d459b7-56a0-4e9b-9682-4a793e0f8ee5",
     "Content-Type": "application/json",

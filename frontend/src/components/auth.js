@@ -1,5 +1,5 @@
 // import { getToken } from '../utils/tokens'
-export const BASE_URL = "http://localhost:3000"
+export const BASE_URL = "http://api.projectarounddomain.mooo.com"
 
 export const signup = (email, password) => {
     return fetch(`${BASE_URL}/signup`, {
