@@ -86,7 +86,7 @@ class Api {
 }
 
 export const api = new Api({
-  url: "http://api.projectarounddomain.mooo.com",
+  url: "https://api.projectarounddomain.mooo.com",
   headers: {
     "Content-Type": "application/json",
   },

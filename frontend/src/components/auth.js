@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.projectarounddomain.mooo.com"
+export const BASE_URL = "https://api.projectarounddomain.mooo.com"
 
 export const signup = (email, password) => {
     return fetch(`${BASE_URL}/signup`, {

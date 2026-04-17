@@ -67,7 +67,9 @@ function App() {
     setInfoToolTipMessage('login');
     auth.signin(email, password)
     .then((data) => {
-      // console.log(data)
+      if (!data || !data.token) {
+        throw new Error('No se recibio un token');
+      }
       if (data.token) {
         setAuthStatus('success');
         setToken(data.token);

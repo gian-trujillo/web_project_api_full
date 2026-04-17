@@ -26,6 +26,12 @@ const cardRouter = require('./routes/cards');
 
 app.use(express.json());
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('El servidor va a caer');
+  }, 0);
+});
+
 app.post('/signin', celebrate({ body: signinValidator }), login);
 app.post('/signup', celebrate({ body: signupValidator }), createUser);
 
