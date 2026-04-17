@@ -26,11 +26,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // useEffect(() => {
-    
-    
-  // }, []);
-  
   useEffect(() => {
     const abort = new AbortController();
     const jwt = getToken();
@@ -39,12 +34,7 @@ function App() {
     }    
     auth.getContent(jwt).then((res) => {
       setIsLoggedIn(true);
-      // console.log(res);
       setCurrentUser(res);
-      // api.getUserData().then((data) => {
-      // }).catch((err) => {
-      //   console.log(err);
-      // });
     }).catch((err) => {
       console.log(err);
     })
@@ -68,7 +58,6 @@ function App() {
     return () => clearTimeout(timer);
   }, [isInfoTooltipOpen, authStatus]);
 
-  // console.log(currentUser)
   const handleLogin = ({ email, password }) => {
     if (!email || !password) {
       return;
@@ -84,10 +73,6 @@ function App() {
         setToken(data.token);
         auth.getContent(data.token).then((res) => {
           setCurrentUser(res)
-          // api.getUserData().then((data) => {
-          // }).catch((err) => {
-          //   console.log(err);
-          // })
         });
         api.getCards()
         .then((cards) => {
@@ -153,12 +138,16 @@ function App() {
   }
     
   async function handleCardLike(card) {
-      const isLiked = card.isLiked;
-      await api.toggleLike(card._id, !isLiked).then((newCard) => {
-          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      }).catch((err) => {
-          console.log(err);
-      });
+    let isLiked;
+    if (card.likes.includes(currentUser._id)) {
+      isLiked = true;
+    }
+    // const isLiked = card.isLiked;
+    await api.toggleLike(card._id, !isLiked).then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    }).catch((err) => {
+        console.log(err);
+    });
   }
 
 

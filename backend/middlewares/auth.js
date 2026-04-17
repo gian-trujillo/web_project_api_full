@@ -4,6 +4,8 @@ const handleAuthError = (res) => {
   res.status(403).send({ message: 'Error de autorizacion' });
 };
 
+const { JWT_SECRET = 'dev-secret' } = process.env;
+
 const extractBearerToken = (authorization) => authorization.replace('Bearer ', '');
 
 module.exports = (req, res, next) => {
@@ -18,7 +20,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, 'temporary-strong-secret');
+    payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
     return handleAuthError(res);
   }

@@ -1,54 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const { celebrate, errors } = require('celebrate');
+const cors = require('cors');
 
 const mongoose = require('mongoose');
 const { login, createUser } = require('./controllers/users');
 const { signupValidator, signinValidator } = require('./validators/authValidator');
-// const validator = require('./middlewares/validate');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
 
-mongoose.connect('mongodb://localhost:27017/aroundb')
+const { MONGO_URI = 'mongodb://localhost:27017/aroundb' } = process.env;
+
+mongoose.connect(MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 
 const app = express();
 
+app.use(cors());
 app.use(requestLogger);
-
-const allowedCors = [
-  'http://localhost:3000',
-  'https://projectarounddomain.mooo.com',
-  'https://www.projectarounddomain.mooo.com',
-];
-
-const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-
-app.use((req, res, next) => {
-  const { origin } = req.headers;
-
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-
-  res.header('Access-Control-Allow-Credentials', 'true');
-
-  const { method } = req;
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-
-    const requestHeaders = req.headers['access-control-request-headers'];
-    if (requestHeaders) {
-      res.header('Access-Control-Allow-Headers', requestHeaders);
-    }
-
-    return res.end();
-  }
-
-  return next();
-});
 
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');

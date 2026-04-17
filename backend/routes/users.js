@@ -9,7 +9,6 @@ const { userIdValidator, updateUserValidator, updateAvatarValidator } = require(
 router.get('/', getUsers);
 router.get('/me', getMyUserProfile);
 router.get('/:id', celebrate({ params: userIdValidator }), getUserById);
-// router.post('/', validate(userValidator), createUser);
 router.patch('/me', celebrate({ body: updateUserValidator }), updateUser);
 router.patch('/me/avatar', celebrate({ body: updateAvatarValidator }), updateAvatar);
 module.exports = router;

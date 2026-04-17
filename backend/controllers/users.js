@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+const { JWT_SECRET = 'dev-secret' } = process.env;
+
 module.exports.getUsers = (req, res, next) => {
   User.find({}).orFail(() => {
     const error = new Error('No se ha encontrado ningún usuario');
@@ -20,10 +22,6 @@ module.exports.getUserById = (req, res, next) => {
     throw error;
   })
     .then((user) => {
-      // if (!user) {
-      //   res.status(404).send({ message: 'ID de usuario no encontrado' });
-      //   return;
-      // }
       res.send(user);
     })
     .catch(next);
@@ -38,12 +36,6 @@ module.exports.getMyUserProfile = (req, res, next) => {
     throw error;
   })
     .then((user) => {
-      // if (!user) {
-      //   const error = new Error('Usuario no encontrado');
-      //   error.statusCode = 404;
-      //   throw error;
-      // }
-
       res.send(user);
     })
     .catch(next);
@@ -108,7 +100,7 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       res.send({
-        token: jwt.sign({ _id: user._id.toString() }, 'temporary-strong-secret', { expiresIn: '7d' }),
+        token: jwt.sign({ _id: user._id.toString() }, JWT_SECRET, { expiresIn: '7d' }),
       });
     })
     .catch(() => {

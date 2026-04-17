@@ -16,7 +16,7 @@ export default function EditProfile() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleUpdateUser({ name, about: about });
+        handleUpdateUser({ name: name, about: about });
     };
 
     return (
@@ -43,7 +43,7 @@ export default function EditProfile() {
                 type="text"
                 placeholder="Acerca de mí"
                 required
-                minLength="2"
+                minLength="10"
                 maxLength="200"
                 name="userDescription"
                 value={about}

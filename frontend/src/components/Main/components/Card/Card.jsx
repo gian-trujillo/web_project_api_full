@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import ImagePopup from "../ImagePopup/ImagePopup.jsx"
 import DeletePopup from "../DeletePopup/DeletePopup.jsx";
+import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 
 export default function Card(props) {
-    const { name, link, isLiked } = props.card;
+    const { currentUser } = useContext(CurrentUserContext);
+    const { name, link, likes } = props.card;
     const { handleOpenPopup, onCardLike, onCardDelete } = props;
+    const isLiked = likes.some(id => id === currentUser._id);
     const cardLikeButtonClassName = `landscapes__card-icon ${ isLiked ? 'landscapes__card-icon_liked' : ''}`;
 
     function handleLikeClick() {
